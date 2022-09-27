@@ -1,11 +1,14 @@
 <script setup>
 import { computed } from 'vue';
-
+import tabBar from './components/tab-bar/tab-bar.vue';
 </script>
 
 <template>
-  <router-view></router-view>
-  <div class="app">App Content</div>
+  
+  <div class="app">
+    <router-view></router-view>
+    <tabBar></tabBar>
+  </div>
 </template>
   
 <style scoped></style>
