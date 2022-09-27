@@ -12,10 +12,11 @@
 
 <script setup>
 import localData from "@/assets/localData/localData"
-import router from "@/router";
 import getImgUrl from "@/utils/load_asset"
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 const currentIndex = ref(0)
+const router = useRouter()
 function switchTab(index, item) {
   currentIndex.value = index
   router.push(item.path)
