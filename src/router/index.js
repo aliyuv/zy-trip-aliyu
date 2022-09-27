@@ -16,8 +16,8 @@ const router = createRouter({
       component: () => import("@/views/collect/collect.vue")
     },
     {
-      path: "/collect",
-      component: () => import("@/views/collect/collect.vue")
+      path: "/order",
+      component: () => import("@/views/order/order.vue")
     },
     {
       path: "/message",
