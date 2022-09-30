@@ -9,7 +9,7 @@
         @cancel="cancelClick"
     >
     </van-search>
-    <van-tabs v-model:active="tabsActive">
+    <van-tabs v-model:active="tabsActive" color="#FF9854"	 line-height="2"	>
       <van-tab title="国内·港澳台">内容 1</van-tab>
       <van-tab title="海外">内容 2</van-tab>
     </van-tabs>
@@ -29,6 +29,13 @@ const cancelClick = () => {
 }
 
 const tabsActive = ref()
+
+
+import {getCityDataAll} from "@/service/index.js";
+
+getCityDataAll().then(res => {
+  console.log(res.data);
+})
 </script>
 
 <style scoped lang="less">
