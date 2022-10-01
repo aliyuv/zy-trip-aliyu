@@ -12,20 +12,21 @@
       </van-search>
       <van-tabs v-model:active="tabsActive" color="#FF9854" line-height="2">
         <template v-for="(value,key,index) in allCities">
-          <van-tab :title="value.title"></van-tab>
+          <!-- 设置 :name 这样子后 tabsActive 的 值就会变为 该对象 切换的数据中 对应的key-->
+          <van-tab :title="value.title" :name="key"></van-tab>
         </template>
       </van-tabs>
     </section>
     <section class="content">
-      <template v-for="item in 100">
-        <section class="item">{{ item }}</section>
+      <template v-for="item in activeGroup?.cities">
+        <section class="item">{{ item}}</section>
       </template>
     </section>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
 
 const searchValue = ref("")
@@ -52,6 +53,9 @@ import {storeToRefs} from "pinia";
 const cityStore = useCityStore()
 cityStore.fetchAllCityData()
 const {allCities} = storeToRefs(cityStore)
+
+//通过tabsActive 来选 切换tab 对应的内容
+const activeGroup = computed(() => allCities.value[tabsActive.value])
 </script>
 
 <style scoped lang="less">
