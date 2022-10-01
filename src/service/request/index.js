@@ -21,6 +21,7 @@ class ZYRequest {
     })
   }
 
+
   get(config) {
     return this.request({...config, method: "get"})
   }

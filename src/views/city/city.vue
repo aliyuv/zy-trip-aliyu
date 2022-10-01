@@ -9,9 +9,10 @@
         @cancel="cancelClick"
     >
     </van-search>
-    <van-tabs v-model:active="tabsActive" color="#FF9854"	 line-height="2"	>
-      <van-tab title="国内·港澳台">内容 1</van-tab>
-      <van-tab title="海外">内容 2</van-tab>
+    <van-tabs v-model:active="tabsActive" color="#FF9854" line-height="2">
+      <template v-for="(value,key,index) in allCities">
+        <van-tab :title="value.title">{{ index }}</van-tab>
+      </template>
     </van-tabs>
   </div>
 </template>
@@ -31,11 +32,19 @@ const cancelClick = () => {
 const tabsActive = ref()
 
 
-import {getCityDataAll} from "@/service/index.js";
+// import {getCityDataAll} from "@/service/index.js";
+import useCityStore from "@/store/moudles/city.js";
+import {storeToRefs} from "pinia";
 
-getCityDataAll().then(res => {
-  console.log(res.data);
-})
+
+// const allCities = ref({})
+// getCityDataAll().then(res => {
+//   allCities.value = res.data
+// })
+
+const cityStore = useCityStore()
+cityStore.fetchAllCityData()
+const {allCities} = storeToRefs(cityStore)
 </script>
 
 <style scoped lang="less">
