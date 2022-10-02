@@ -59,6 +59,7 @@ const {allCities} = storeToRefs(cityStore)
 //通过tabsActive 来选 切换tab 对应的内容
 const activeGroup = computed(() => allCities.value[tabsActive.value])
 
+
 </script>
 
 <style scoped lang="less">

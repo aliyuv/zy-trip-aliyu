@@ -4,7 +4,7 @@
       <section class="hot-city">
         <van-index-anchor index="热门"></van-index-anchor>
          <template v-for="(item,index) in groupData.hotCities" :key="index">
-           <van-tag round type="primary" color="#fff4ec" text-color="#000" size="large">{{ item.cityName }}</van-tag>
+           <van-tag round type="primary" color="#fff4ec" text-color="#000" size="large" @click="hotCityTagClick(item)">{{ item.cityName }}</van-tag>
          </template>
       </section>
 
@@ -22,6 +22,8 @@
 
 <script setup>
 import {computed} from "vue";
+import useCityStore from "@/store/moudles/city.js";
+import {useRouter} from "vue-router";
 
 const props = defineProps({
   groupData: {
@@ -36,6 +38,13 @@ const index_bar_list = computed(() => {
   list.unshift("#")
   return list
 })
+
+const cityStore = useCityStore()
+const router = useRouter()
+const hotCityTagClick = (item) => {
+ cityStore.activeCityName = item.cityName
+  router.back()
+}
 </script>
 
 <style scoped lang="less">
