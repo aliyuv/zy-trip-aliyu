@@ -4,9 +4,9 @@
   </section>
   <section class="location">
     <section class="city" @click="changeSelectCity">
-      <span>兰州</span>
+      <span>{{cityStore.activeCityName.slice(0,2)}}</span>
     </section>
-    <section class="postion">
+    <section class="postion" @click="geographicPosition">
       <span>我的位置</span>
       <img src="@/assets/img/home/icon_location.png" alt="">
     </section>
@@ -15,11 +15,35 @@
 
 <script setup>
 import {useRouter} from "vue-router";
+import useCityStore from "@/store/moudles/city.js";
 
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {
   router.push("/city")
+}
+
+//获取选中的热门城市
+const cityStore = useCityStore()
+
+//获取当前地理位置
+const geographicPosition = () => {
+  // navigator.geolocation.getCurrentPosition(res => {
+  //   console.log("获取位置成功:", res)
+  // }, err => {
+  //   console.log("获取位置失败:", err)
+  // }, {
+  //   enableHighAccuracy: true,
+  //   timeout: 5000,
+  //   maximumAge: 0
+  // })
+
+  const objCity = new BMap.LocalCity();
+  objCity.get(function (result){
+    const city = result.name;
+    cityStore.activeCityName = city
+  });
+
 }
 </script>
 
