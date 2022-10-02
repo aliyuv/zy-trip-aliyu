@@ -4,7 +4,7 @@
   </section>
   <section class="location">
     <section class="city" @click="changeSelectCity">
-      <span>{{ cityStore.activeCityName.slice(0, 2) }}</span>
+      <span>{{ activeCityName.name }}</span>
     </section>
     <section class="postion" @click="geographicPosition">
       <span>我的位置</span>
@@ -16,7 +16,8 @@
 <script setup>
 import {useRouter} from "vue-router";
 import useCityStore from "@/store/moudles/city.js";
-import city from "@/store/moudles/city.js";
+import {storeToRefs} from "pinia";
+import {ref} from "vue";
 
 const router = useRouter()
 // 选择城市
@@ -26,13 +27,12 @@ const changeSelectCity = () => {
 
 //获取选中的热门城市
 const cityStore = useCityStore()
-
+const {activeCityName} = storeToRefs(cityStore)
 //获取当前地理位置
 const geographicPosition = () => {
   const objCity = new BMap.LocalCity();
   objCity.get(function (result) {
-    const city = result.name;
-    cityStore.activeCityName = city
+    activeCityName.value.name = result.name
   })
 }
 

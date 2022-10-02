@@ -4,7 +4,9 @@ import {getCityDataAll} from "@/service/index.js";
 const useCityStore = defineStore("city", {
   state: () => ({
     allCities: {},
-    activeCityName: "北京"
+    activeCityName: {
+      name: "北京"
+    }
   }),
   actions: {
     async fetchAllCityData() {
