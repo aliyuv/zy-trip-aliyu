@@ -18,14 +18,16 @@
       </van-tabs>
     </section>
     <section class="content">
-      <template v-for="item in activeGroup?.cities">
-        <section class="item">{{ item}}</section>
+      <template v-for="(value,key,index) in allCities">
+        <cityGroupItem :groupData="value" v-show="tabsActive === key"></cityGroupItem>
       </template>
     </section>
+
   </div>
 </template>
 
 <script setup>
+import cityGroupItem from "@/views/city/cpns/city-group-item.vue"
 import {computed, ref} from "vue";
 import {useRouter} from "vue-router";
 
@@ -56,13 +58,20 @@ const {allCities} = storeToRefs(cityStore)
 
 //通过tabsActive 来选 切换tab 对应的内容
 const activeGroup = computed(() => allCities.value[tabsActive.value])
+
 </script>
 
 <style scoped lang="less">
 .city {
+  .top {
+    position: relative;
+    z-index: 9;
+  }
+
   .content {
     height: calc(100vh - 98px);
     overflow-y: auto;
   }
 }
+
 </style>
