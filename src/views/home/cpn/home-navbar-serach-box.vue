@@ -12,19 +12,19 @@
     </section>
   </section>
   <section class="section date-range bottom-gray-line">
-    <div class="start">
-      <div class="date">
+    <section class="start">
+      <section class="date">
         <span>入住</span>
         <div class="time">10月03日</div>
-      </div>
-      <div class="stay">共一晚</div>
-    </div>
-    <div class="end">
-      <div class="date">
+      </section>
+      <section class="stay">共一晚</>
+    </section>
+    <section class="end">
+      <section class="date">
         <span>离店</span>
-        <div class="time">10月04日</div>
-      </div>
-    </div>
+        <section class="time">10月04日</>
+      </section>
+    </section>
   </section>
 </template>
 
