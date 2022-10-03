@@ -35,6 +35,15 @@
         :show-confirm="false"
         @confirm="onConfirm"
     />
+    <!-- 价格/人数选择 -->
+    <div class="section price-counter bottom-gray-line ">
+      <div class="start">价格不限</div>
+      <div class="end">人数不限</div>
+    </div>
+    <!-- 关键字 -->
+    <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
+
+
   </section>
 </template>
 
@@ -123,7 +132,8 @@ const checkHousing = () => {
   flex-wrap: wrap;
   height: 40px;
   padding: 0 20px;
-
+  color: #999;
+  font-size: 14px;
   .start {
     flex: 1;
     display: flex;
@@ -166,5 +176,11 @@ const checkHousing = () => {
 
 .search-box {
   --van-calendar-popup-height: 100%;
+}
+
+.price-counter {
+  .start {
+    border-right: 1px solid var(--line-color);
+  }
 }
 </style>
