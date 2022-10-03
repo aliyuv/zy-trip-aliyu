@@ -36,14 +36,20 @@
         @confirm="onConfirm"
     />
     <!-- 价格/人数选择 -->
-    <div class="section price-counter bottom-gray-line ">
+    <section class="section price-counter bottom-gray-line ">
       <div class="start">价格不限</div>
       <div class="end">人数不限</div>
-    </div>
+    </section>
     <!-- 关键字 -->
-    <div class="section keyword bottom-gray-line">关键字/位置/民宿名</div>
-
-
+    <section class="section keyword bottom-gray-line">关键字/位置/民宿名</section>
+    <!-- 热门建议 -->
+    <section class="section hot-suggest">
+      <template v-for="(item,index) in homeStore.hotSuggest" :key="index">
+        <section class="yan-tag">
+          <van-tag round type="primary" size="medium" color="#F1F3F5">{{ item.tagText.text }}</van-tag>
+        </section>
+      </template>
+    </section>
   </section>
 </template>
 
@@ -53,6 +59,10 @@ import useCityStore from "@/store/moudles/city.js";
 import {storeToRefs} from "pinia";
 import {formatMonthDay, getDiffDays} from "@/utils/formatDate.js";
 import {computed, ref} from "vue";
+import useHomeStore from "@/store/moudles/home.js";
+
+const homeStore = useHomeStore()
+homeStore.fetchHotSuggestData()
 
 const router = useRouter()
 // 选择城市
@@ -134,6 +144,7 @@ const checkHousing = () => {
   padding: 0 20px;
   color: #999;
   font-size: 14px;
+
   .start {
     flex: 1;
     display: flex;
@@ -182,5 +193,9 @@ const checkHousing = () => {
   .start {
     border-right: 1px solid var(--line-color);
   }
+}
+
+.yan-tag {
+  margin: 2px 4px;
 }
 </style>
