@@ -15,14 +15,14 @@
     <section class="start">
       <section class="date">
         <span>入住</span>
-        <div class="time">10月03日</div>
+        <div class="time">{{today}}</div>
       </section>
       <section class="stay">共一晚</section>
     </section>
     <section class="end">
       <section class="date">
         <span>离店</span>
-        <section class="time">10月04日</section>
+        <section class="time">{{tomorrow}}</section>
       </section>
     </section>
   </section>
@@ -32,8 +32,8 @@
 import {useRouter} from "vue-router";
 import useCityStore from "@/store/moudles/city.js";
 import {storeToRefs} from "pinia";
-import {ref} from "vue";
-
+import {getDate} from "@/utils/formatDate.js";
+import {computed} from "vue";
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {
@@ -50,6 +50,10 @@ const geographicPosition = () => {
     activeCityName.value.name = result.name
   })
 }
+
+//日期处理
+const today = computed(() => getDate().today)
+const tomorrow = computed(() => getDate().tomorrow)
 
 </script>
 
