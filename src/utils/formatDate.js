@@ -1,7 +1,9 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs'
 
-export function getDate(date){
-  const tomorrow = dayjs(new Date()).add(1,"day").format("MM月DD日")
-  const today = dayjs(new Date()).format("MM月DD日")
-  return {today,tomorrow}
+export function formatMonthDay(date) {
+  return dayjs(date).format("MM月DD日")
+}
+
+export function getDiffDays(startDate, endDate) {
+  return dayjs(endDate).diff(startDate, "day")
 }
