@@ -17,12 +17,12 @@
         <span>入住</span>
         <div class="time">10月03日</div>
       </section>
-      <section class="stay">共一晚</>
+      <section class="stay">共一晚</section>
     </section>
     <section class="end">
       <section class="date">
         <span>离店</span>
-        <section class="time">10月04日</>
+        <section class="time">10月04日</section>
       </section>
     </section>
   </section>
