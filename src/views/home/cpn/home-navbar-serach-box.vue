@@ -11,6 +11,21 @@
       <img src="@/assets/img/home/icon_location.png" alt="">
     </section>
   </section>
+  <section class="section date-range bottom-gray-line">
+    <div class="start">
+      <div class="date">
+        <span>入住</span>
+        <div class="time">10月03日</div>
+      </div>
+      <div class="stay">共一晚</div>
+    </div>
+    <div class="end">
+      <div class="date">
+        <span>离店</span>
+        <div class="time">10月04日</div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script setup>
@@ -67,6 +82,47 @@ const geographicPosition = () => {
     }
   }
 
+}
+.section{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 40px;
+  padding: 0 20px;
+  .start {
+    flex: 1;
+    display: flex;
+    height: 44px;
+    align-items: center;
+    .how-long{
+      padding-right: 20px;
+    }
+  }
+
+  .end {
+    min-width: 30%;
+    padding-left: 20px;
+  }
+
+  span{
+    font-size: 12px;
+    color: #999;
+  }
+  .time{
+    margin-top: 3px;
+    color: #333;
+    font-size: 15px;
+    font-weight:500 ;
+  }
+}
+.date-range {
+  height: 40px;
+  .stay {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+  }
 }
 
 </style>

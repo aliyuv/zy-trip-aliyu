@@ -46,7 +46,6 @@ const {activeCityName} = cityStore
 const router = useRouter()
 
 const hotCityTagClick = (item) => {
-  console.log(item.cityName);
   activeCityName.name = item.cityName
   router.back()
 }
