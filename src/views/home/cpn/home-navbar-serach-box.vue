@@ -50,6 +50,9 @@
         </section>
       </template>
     </section>
+    <section class="section search-btn">
+      <div class="btn">开始搜索</div>
+    </section>
   </section>
 </template>
 
@@ -144,7 +147,6 @@ const checkHousing = () => {
   padding: 0 20px;
   color: #999;
   font-size: 14px;
-
   .start {
     flex: 1;
     display: flex;
@@ -197,5 +199,11 @@ const checkHousing = () => {
 
 .yan-tag {
   margin: 2px 4px;
+}
+
+.search-btn {
+  .btn {
+
+  }
 }
 </style>
