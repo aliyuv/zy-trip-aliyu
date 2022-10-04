@@ -43,7 +43,7 @@ const tabsActive = ref()
 
 
 // import {getCityDataAll} from "@/service/index.js";
-import useCityStore from "@/store/moudles/city.js";
+import useCityStore from "@/store/modules/city.js";
 import {storeToRefs} from "pinia";
 
 
