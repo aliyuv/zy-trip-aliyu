@@ -50,7 +50,7 @@
         </section>
       </template>
     </section>
-    <section class="section search-btn">
+    <section class="search-btn">
       <div class="btn">开始搜索</div>
     </section>
   </section>
@@ -147,6 +147,7 @@ const checkHousing = () => {
   padding: 0 20px;
   color: #999;
   font-size: 14px;
+
   .start {
     flex: 1;
     display: flex;
@@ -202,8 +203,21 @@ const checkHousing = () => {
 }
 
 .search-btn {
+  height: auto;
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .btn {
-
+    width: 342px;
+    height: 38px;
+    max-height: 50px;
+    font-weight:500;
+    line-height: 38px;
+    text-align: center;
+    border-radius: 20px;
+    color: #fff;
+    background-image: var(--theme-linear-gradient);
   }
 }
 </style>
