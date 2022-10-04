@@ -51,21 +51,28 @@
       </template>
     </section>
     <section class="search-btn">
-      <div class="btn">开始搜索</div>
+      <div class="btn" @click="startSearch">开始搜索</div>
     </section>
+    <sortModule :categories-data="categoriesData"></sortModule>
   </section>
 </template>
 
 <script setup>
+import sortModule from "@/views/search/cpns/categories-sort-module.vue"
 import {useRouter} from "vue-router";
-import useCityStore from "@/store/moudles/city.js";
+import useCityStore from "@/store/modules/city.js";
 import {storeToRefs} from "pinia";
 import {formatMonthDay, getDiffDays} from "@/utils/formatDate.js";
 import {computed, ref} from "vue";
-import useHomeStore from "@/store/moudles/home.js";
+import useHomeStore from "@/store/modules/home.js";
+import useCategories from "@/store/modules/categories.js";
 
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
+
+const categoriesStore = useCategories()
+categoriesStore.fetchCategoriesData()
+const {categoriesData} = storeToRefs(categoriesStore)
 
 const router = useRouter()
 // 选择城市
@@ -89,9 +96,11 @@ const geographicPosition = () => {
 const nowDate = new Date()
 const newDate = new Date()
 newDate.setDate(nowDate.getDate() + 1)
+
 const today = ref(formatMonthDay(nowDate))
 const tomorrow = ref(formatMonthDay(newDate))
 const getDiffDate = ref(getDiffDays(nowDate, newDate))
+
 //入住信息
 const showCalendar = ref(false)
 const onConfirm = (value) => {
@@ -105,6 +114,17 @@ const onConfirm = (value) => {
 
 const checkHousing = () => {
   showCalendar.value = true
+}
+
+const startSearch = () => {
+  router.push({
+    path: "/search",
+    query: {
+      today: today.value,
+      tomorrow: tomorrow.value,
+      activeCityName: activeCityName.value.name
+    }
+  })
 }
 </script>
 
@@ -204,15 +224,16 @@ const checkHousing = () => {
 
 .search-btn {
   height: auto;
-  margin-top: 36px;
+  margin-top: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
+
   .btn {
     width: 342px;
     height: 38px;
     max-height: 50px;
-    font-weight:500;
+    font-weight: 500;
     line-height: 38px;
     text-align: center;
     border-radius: 20px;
