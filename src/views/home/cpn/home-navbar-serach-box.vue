@@ -54,7 +54,12 @@
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
     <sortModule :categories-data="categoriesData"></sortModule>
-    <house-list-v3 :houseListData = "houseListData"></house-list-v3>
+    <section>
+      <div class="title">
+        <h1>热门精选</h1>
+      </div>
+      <house-list-v3 :houseListData="houseListData"></house-list-v3>
+    </section>
   </section>
 </template>
 
@@ -253,4 +258,13 @@ const startSearch = () => {
     background-image: var(--theme-linear-gradient);
   }
 }
+
+//hot
+.title {
+  margin: 8px 0;
+  font-weight: 800;
+  font-size: 19px;
+  padding: 0 10px;
+}
+
 </style>

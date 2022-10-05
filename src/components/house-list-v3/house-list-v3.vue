@@ -1,9 +1,6 @@
 <template>
   <section class="recommend-house-list">
     <section class="container">
-      <div class="title">
-        <h1>热门精选</h1>
-      </div>
       <div class="content">
         <template v-for="(item,index) in houseListData" :key="index">
           <div v-if="item.discoveryContentType === 3" class="house-list-v3">
@@ -55,19 +52,15 @@ defineProps({
     display: flex;
     flex-direction: column;
 
-    .title {
-      margin-bottom: 6px;
-      font-weight: 800;
-      font-size: 19px;
-    }
-
     .content {
       .house-list-v3 {
         display: flex;
         flex-direction: column;
-        //border: 1px solid red;
         padding: 4px 4px;
-        margin-top: 10px;
+
+        .location-address {
+          font-size: 12px;
+        }
 
         .background-img {
           img {
