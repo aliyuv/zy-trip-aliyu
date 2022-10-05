@@ -3,12 +3,14 @@ import {fetchHouseListDate} from "@/service/index.js";
 
 const useHouseList = defineStore("houselist", {
   state: () => ({
-    houseListData: []
+    houseListData: [],
+    currentPage: 1
   }),
   actions: {
-    async getHouseListData(count) {
-      const res = await fetchHouseListDate(count)
+    async getHouseListData() {
+      const res = await fetchHouseListDate(this.currentPage)
       this.houseListData.push(...res.data)
+      this.currentPage++
     }
   }
 })

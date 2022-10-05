@@ -54,11 +54,16 @@
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
     <sortModule :categories-data="categoriesData"></sortModule>
-    <section>
+    <section class="home-content">
       <div class="title">
         <h1>热门精选</h1>
       </div>
-      <house-list-v3 :houseListData="houseListData"></house-list-v3>
+      <div class="list">
+        <template v-for="(item,index) in houseListData">
+          <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item"></house-list-v9>
+          <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item"></house-list-v3>
+        </template>
+      </div>
     </section>
   </section>
 </template>
@@ -66,6 +71,7 @@
 <script setup>
 import sortModule from "@/views/search/cpns/categories-sort-module.vue"
 import houselistv3 from "@/components/house-list-v3/house-list-v3.vue"
+import houselistv9 from "@/components/house-list-v9/house-list-v9.vue"
 import {useRouter} from "vue-router";
 import useCityStore from "@/store/modules/city.js";
 import {storeToRefs} from "pinia";
@@ -259,12 +265,18 @@ const startSearch = () => {
   }
 }
 
-//hot
-.title {
-  margin: 8px 0;
-  font-weight: 800;
-  font-size: 19px;
-  padding: 0 10px;
+.home-content {
+  padding: 10px 8px;
+
+  .title {
+    font-size: 22px;
+    padding: 10px;
+  }
+
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 </style>
