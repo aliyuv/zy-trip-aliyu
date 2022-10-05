@@ -19,7 +19,11 @@
           <div class="price">
             <div class="final">¥{{ houseListData.data.finalPrice }}</div>
             <div class="product">¥{{ houseListData.data.productPrice }}</div>
-            <div class="tip">{{ houseListData?.data?.priceTipBadge?.text }}</div>
+            <div class="tip" v-if="houseListData.data.priceTipBadge?.text">
+              {{
+                houseListData.data.priceTipBadge.text
+              }}
+            </div>
           </div>
         </div>
       </div>

@@ -63,6 +63,7 @@
           <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item"></house-list-v9>
           <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item"></house-list-v3>
         </template>
+        <button @click="loadingBtn">加载</button>
       </div>
     </section>
   </section>
