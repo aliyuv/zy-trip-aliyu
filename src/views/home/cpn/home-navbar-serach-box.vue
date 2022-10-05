@@ -54,6 +54,10 @@
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
     <sortModule :categories-data="categoriesData"></sortModule>
+
+    <section class="section">
+      <button @click="loadingBtn">加载更多内容~</button>
+    </section>
   </section>
 </template>
 
@@ -66,6 +70,7 @@ import {formatMonthDay, getDiffDays} from "@/utils/formatDate.js";
 import {computed, ref} from "vue";
 import useHomeStore from "@/store/modules/home.js";
 import useCategories from "@/store/modules/categories.js";
+import useHouseList from "@/store/modules/houselist.js";
 
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
@@ -74,6 +79,14 @@ const categoriesStore = useCategories()
 categoriesStore.fetchCategoriesData()
 const {categoriesData} = storeToRefs(categoriesStore)
 
+const houseListStore = useHouseList()
+let count = 1
+houseListStore.getHouseListData(count)
+
+const loadingBtn = () => {
+  houseListStore.getHouseListData(count)
+  count ++
+}
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {
