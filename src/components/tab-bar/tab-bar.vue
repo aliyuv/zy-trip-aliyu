@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="currentIndex">
+  <van-tabbar v-model="currentIndex" route>
     <template v-for="(item,index) in localData" key="index">
       <van-tabbar-item :to="item.path">
         <span>{{item.text}}</span>
