@@ -57,6 +57,7 @@ const value = computed(() => {
       bottom: 0;
       padding: 8px 10px;
       color: white;
+      font-size: 12px;
     }
 
     .summary {
@@ -67,8 +68,10 @@ const value = computed(() => {
       margin: 5px 0;
       overflow: hidden;
       text-overflow: ellipsis;
+      display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      line-height: 1.5;
     }
 
     .price {

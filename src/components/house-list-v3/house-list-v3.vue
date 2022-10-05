@@ -77,7 +77,14 @@ defineProps({
           }
 
           .house-name {
-            font-size: 15px;
+            font-size: 14px;
+            margin: 5px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-height: 1.5;
           }
 
           .in--house_otherInfo {
