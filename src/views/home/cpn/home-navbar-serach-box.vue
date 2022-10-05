@@ -54,15 +54,13 @@
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
     <sortModule :categories-data="categoriesData"></sortModule>
-
-    <section class="section">
-      <button @click="loadingBtn">加载更多内容~</button>
-    </section>
+    <house-list-v3 :houseListData = "houseListData"></house-list-v3>
   </section>
 </template>
 
 <script setup>
 import sortModule from "@/views/search/cpns/categories-sort-module.vue"
+import houselistv3 from "@/components/house-list-v3/house-list-v3.vue"
 import {useRouter} from "vue-router";
 import useCityStore from "@/store/modules/city.js";
 import {storeToRefs} from "pinia";
@@ -80,13 +78,14 @@ categoriesStore.fetchCategoriesData()
 const {categoriesData} = storeToRefs(categoriesStore)
 
 const houseListStore = useHouseList()
+const {houseListData} = storeToRefs(houseListStore)
 let count = 1
 houseListStore.getHouseListData(count)
-
 const loadingBtn = () => {
   houseListStore.getHouseListData(count)
-  count ++
+  count++
 }
+
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {
