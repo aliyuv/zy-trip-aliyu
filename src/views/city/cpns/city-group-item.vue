@@ -24,7 +24,7 @@
 
 <script setup>
 import {computed} from "vue";
-import useCityStore from "@/store/modules/city.js";
+import useCityStore from "@/store/modules/home/city.js";
 import {useRouter} from "vue-router";
 
 const props = defineProps({

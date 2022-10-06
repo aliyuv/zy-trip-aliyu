@@ -53,9 +53,6 @@
     <section class="search-btn">
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
-    <div v-if="isShowSearchDateBox">
-      <h1>搜索框</h1>
-    </div>
     <sortModule :categories-data="categoriesData"></sortModule>
     <section class="home-content">
       <div class="title">
@@ -77,13 +74,13 @@ import sortModule from "@/views/search/cpns/categories-sort-module.vue"
 import houselistv3 from "@/components/house-list-v3/house-list-v3.vue"
 import houselistv9 from "@/components/house-list-v9/house-list-v9.vue"
 import {useRouter} from "vue-router";
-import useCityStore from "@/store/modules/city.js";
+import useCityStore from "@/store/modules/home/city.js";
 import {storeToRefs} from "pinia";
 import {formatMonthDay, getDiffDays} from "@/utils/formatDate.js";
 import {computed, ref, watch} from "vue";
-import useHomeStore from "@/store/modules/home.js";
-import useCategories from "@/store/modules/categories.js";
-import useHouseList from "@/store/modules/houselist.js";
+import useHomeStore from "@/store/modules/home/home.js";
+import useCategories from "@/store/modules/home/categories.js";
+import useHouseList from "@/store/modules/home/houselist.js";
 import useScrollTop from "@/hooks/useScroll.js";
 
 const homeStore = useHomeStore()
@@ -108,9 +105,7 @@ watch(isScrollBottoming, (newValue) => {
   }
 })
 
-const isShowSearchDateBox = computed(() => {
-  return scrollTop.value >= 360
-})
+
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {

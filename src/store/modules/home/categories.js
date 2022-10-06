@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import {getCategories} from "@/service"
+import {getCategories} from "@/service/index.js"
 const useCategories = defineStore("categories",{
   state: () => ({
     categoriesData : []
