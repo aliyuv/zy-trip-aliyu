@@ -16,14 +16,14 @@
       <section class="start">
         <section class="date">
           <span>入住</span>
-          <div class="time">{{ today }}</div>
+          <div class="time">{{ startDateStr }}</div>
         </section>
-        <section class="stay">共{{ getDiffDate }}晚</section>
+        <section class="stay">共{{ stayCount }}晚</section>
       </section>
       <section class="end">
         <section class="date">
           <span>离店</span>
-          <section class="time">{{ tomorrow }}</section>
+          <section class="time">{{ endDateStr }}</section>
         </section>
       </section>
     </section>
@@ -82,6 +82,7 @@ import useHomeStore from "@/store/modules/home/home.js";
 import useCategories from "@/store/modules/home/categories.js";
 import useHouseList from "@/store/modules/home/houselist.js";
 import useScrollTop from "@/hooks/useScroll.js";
+import useMainStore from "@/store/modules/main/main.js";
 
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
@@ -125,23 +126,22 @@ const geographicPosition = () => {
 }
 
 //日期处理
-const nowDate = new Date()
-const newDate = new Date()
-newDate.setDate(nowDate.getDate() + 1)
-
-const today = ref(formatMonthDay(nowDate))
-const tomorrow = ref(formatMonthDay(newDate))
-const getDiffDate = ref(getDiffDays(nowDate, newDate))
+const mainStore = useMainStore()
+const {startDate, endDate} = storeToRefs(mainStore)
+const startDateStr = computed(() => formatMonthDay(startDate.value))
+const endDateStr = computed(() => formatMonthDay(endDate.value))
+const stayCount = ref(getDiffDays(startDate.value, endDate.value))
 
 //入住信息
 const showCalendar = ref(false)
 const onConfirm = (value) => {
+  //隐藏日历
   showCalendar.value = false
   const selectStartDate = value[0]
   const selectEndDate = value[1]
-  today.value = formatMonthDay(selectStartDate)
-  tomorrow.value = formatMonthDay(selectEndDate)
-  getDiffDate.value = getDiffDays(selectStartDate, selectEndDate)
+  startDate.value = selectStartDate
+  endDate.value = selectEndDate
+  stayCount.value = getDiffDays(selectStartDate, selectEndDate)
 }
 
 const checkHousing = () => {
@@ -152,8 +152,8 @@ const startSearch = () => {
   router.push({
     path: "/search",
     query: {
-      today: today.value,
-      tomorrow: tomorrow.value,
+      today: startDate.value,
+      tomorrow: endDate.value,
       activeCityName: activeCityName.value.name
     }
   })
