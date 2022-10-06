@@ -3,7 +3,7 @@
     <HomeNavbar></HomeNavbar>
     <home-serach-box></home-serach-box>
     <div class="search-bar" v-if="isShowSearchDateBox">
-      <searchBar></searchBar>
+      <searchBar :startDate="startDateStr" :endDate="endDateStr"></searchBar>
     </div>
   </div>
 </template>
@@ -14,10 +14,19 @@ import HomeSerachBox from "@/views/home/cpn/home-navbar-serach-box.vue"
 import {computed} from "vue";
 import useScrollTop from "@/hooks/useScroll.js";
 import searchBar from "@/components/serach-bar/search-bar.vue"
+import useMainStore from "@/store/modules/main/main.js";
+import {storeToRefs} from "pinia";
+import {formatMonthDay} from "@/utils/formatDate.js";
+
 const {scrollTop} = useScrollTop()
 const isShowSearchDateBox = computed(() => {
   return scrollTop.value >= 360
 })
+
+const mainStore = useMainStore()
+const {startDate, endDate} = storeToRefs(mainStore)
+const startDateStr = computed(() => formatMonthDay(startDate.value, "MM.DD"))
+const endDateStr = computed(() => formatMonthDay(endDate.value, "MM.DD"))
 </script>
 
 <style lang="less" scoped>

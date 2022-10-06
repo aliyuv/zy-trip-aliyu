@@ -3,11 +3,11 @@
     <div class="select-time">
       <div class="item start">
         <div class="name">住</div>
-        <div class="date">10.06</div>
+        <div class="date">{{ startDate }}</div>
       </div>
       <div class="item end">
         <div class="name">离</div>
-        <div class="date">10.07</div>
+        <div class="date">{{ endDate }}</div>
       </div>
     </div>
     <div class="content">
@@ -20,6 +20,16 @@
 </template>
 
 <script setup>
+defineProps({
+  startDate: {
+    type: String,
+    default: ""
+  },
+  endDate: {
+    type: String,
+    default: ""
+  }
+})
 </script>
 
 <style lang="less" scoped>
