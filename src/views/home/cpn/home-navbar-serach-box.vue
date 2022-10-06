@@ -53,6 +53,9 @@
     <section class="search-btn">
       <div class="btn" @click="startSearch">开始搜索</div>
     </section>
+    <div v-if="isShowSearchDateBox">
+      <h1>搜索框</h1>
+    </div>
     <sortModule :categories-data="categoriesData"></sortModule>
     <section class="home-content">
       <div class="title">
@@ -63,9 +66,9 @@
           <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item"></house-list-v9>
           <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item"></house-list-v3>
         </template>
-        <button @click="loadingBtn">加载</button>
       </div>
     </section>
+
   </section>
 </template>
 
@@ -77,10 +80,11 @@ import {useRouter} from "vue-router";
 import useCityStore from "@/store/modules/city.js";
 import {storeToRefs} from "pinia";
 import {formatMonthDay, getDiffDays} from "@/utils/formatDate.js";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import useHomeStore from "@/store/modules/home.js";
 import useCategories from "@/store/modules/categories.js";
 import useHouseList from "@/store/modules/houselist.js";
+import useScrollTop from "@/hooks/useScroll.js";
 
 const homeStore = useHomeStore()
 homeStore.fetchHotSuggestData()
@@ -91,13 +95,22 @@ const {categoriesData} = storeToRefs(categoriesStore)
 
 const houseListStore = useHouseList()
 const {houseListData} = storeToRefs(houseListStore)
-let count = 1
-houseListStore.getHouseListData(count)
-const loadingBtn = () => {
-  houseListStore.getHouseListData(count)
-  count++
-}
+houseListStore.getHouseListData()
 
+const {isScrollBottoming, scrollTop} = useScrollTop()
+watch(isScrollBottoming, (newValue) => {
+  if (newValue) {
+    houseListStore.getHouseListData().then(() => {
+      isScrollBottoming.value = false
+    }).catch(() => {
+      console.log("没有数据啦~")
+    })
+  }
+})
+
+const isShowSearchDateBox = computed(() => {
+  return scrollTop.value >= 360
+})
 const router = useRouter()
 // 选择城市
 const changeSelectCity = () => {
@@ -153,6 +166,10 @@ const startSearch = () => {
 </script>
 
 <style lang="less" scoped>
+.search-box {
+  padding-bottom: 60px;
+}
+
 .banner {
   img {
     width: 100%;
