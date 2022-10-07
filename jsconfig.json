@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    // "target": "es5",
     "module": "esnext",
     "baseUrl": "./",
     "moduleResolution": "node",
+    "jsx": "preserve",
     "paths": {
       "@/*": [
         "src/*"
@@ -15,8 +15,5 @@
       "dom.iterable",
       "scripthost"
     ]
-  },
-  "vueCompilerOptions": {
-    "experimentalDisableTemplateSupport": true
   }
 }
