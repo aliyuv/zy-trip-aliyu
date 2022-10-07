@@ -60,8 +60,8 @@
       </div>
       <div class="list">
         <template v-for="(item,index) in houseListData">
-          <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item"></house-list-v9>
-          <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item"></house-list-v3>
+          <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item" @click="toDetailClick"></house-list-v9>
+          <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item" @click="toDetailClick"></house-list-v3>
         </template>
       </div>
     </section>
@@ -157,6 +157,10 @@ const startSearch = () => {
       activeCityName: activeCityName.value.name
     }
   })
+}
+
+const toDetailClick = () => {
+  router.push("/detail")
 }
 </script>
 
