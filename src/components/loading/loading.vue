@@ -1,5 +1,5 @@
 <template>
-  <div class="loading">
+  <div class="loading" v-if="mainStore.isLoading" @click="loadingBgClick">
     <div class="container">
       <img src="@/assets/img/home/full-screen-loading.gif" alt="">
     </div>
@@ -7,6 +7,13 @@
 </template>
 
 <script setup>
+import useMainStore from "@/store/modules/main/main.js";
+
+const mainStore = useMainStore()
+
+const loadingBgClick = () => {
+  mainStore.isLoading = false
+}
 </script>
 
 <style scoped lang="less">
