@@ -7,7 +7,8 @@ const useDetailStore = defineStore("detail", {
   }),
   actions: {
     async fetchDetailAllData(houseId) {
-      this.detailAllData = await getDetailData(houseId)
+      const res = await getDetailData(houseId)
+      this.detailAllData = res.data
     }
   }
 })
