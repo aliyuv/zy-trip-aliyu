@@ -38,6 +38,7 @@ const props = defineProps({
   }
 })
 
+//首先创建一个空对象,然后遍历swipeData数据, swipeData里面的数据结构 就是 通过遍历取到 enumPictureCategory的值作为key, 然后存入一个变量valueArray, 然后去判断当前这个valueArray是否有值,如果没有的话就设置为空数组, 然后将 遍历出的每条数据赋值给对应的key下. 然后push到 valueArray里
 const swipeGroup = {} // "2" : []
 for (const item of props.swipeData) {
   let valueArray = swipeGroup[item.enumPictureCategory]
@@ -63,6 +64,7 @@ const getCategoryIndex = (item) => {
 
 <style scoped lang="less">
 .detail-swipe {
+  background-color: #fff;
   position: relative;
 
   .swipe-list {
