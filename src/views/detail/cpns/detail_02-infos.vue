@@ -43,7 +43,6 @@ defineProps({
 <style scoped lang="less">
 .infos {
   padding: 5px 10px;
-  background: #ffffff;
   .container {
     display: flex;
     flex-direction: column;

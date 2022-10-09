@@ -64,7 +64,6 @@ const getCategoryIndex = (item) => {
 
 <style scoped lang="less">
 .detail-swipe {
-  background-color: #fff;
   position: relative;
 
   .swipe-list {

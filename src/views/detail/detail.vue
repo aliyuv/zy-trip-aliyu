@@ -13,6 +13,7 @@
                     :swipe-data="mainPart.topModule.housePicture.housePics"
       ></detail-swipe>
       <detailInfos :info-data="mainPart.topModule"></detailInfos>
+      <detailFacility :facilityData="mainPart.dynamicModule.facilityModule.houseFacility"></detailFacility>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@ import {storeToRefs} from "pinia"
 import {useRoute, useRouter} from "vue-router";
 import detailSwipe from "@/views/detail/cpns/detail_01-swipe.vue"
 import detailInfos from "@/views/detail/cpns/detail_02-infos.vue"
+import detailFacility from "@/views/detail/cpns/detail_03-facility.vue"
 import {computed} from "vue";
 
 const route = useRoute()
@@ -40,7 +42,4 @@ const onClickLeft = () => {
 </script>
 
 <style scoped lang="less">
-.detail {
-  background-color: #F2F3F4;
-}
 </style>
