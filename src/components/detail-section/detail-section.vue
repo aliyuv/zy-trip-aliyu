@@ -8,7 +8,7 @@
         <h3>我是默认内容</h3>
       </slot>
     </div>
-    <div class="footer">
+    <div class="footer" v-if="moreText.length">
       <span class="more">{{ moreText }}</span>
       <van-icon name="arrow"/>
     </div>
