@@ -18,6 +18,7 @@
       <detailComment :commentData="mainPart.dynamicModule.commentModule"></detailComment>
       <detailNotice :orderRules="mainPart.dynamicModule.rulesModule.orderRules"></detailNotice>
       <detailMap :position="mainPart.dynamicModule.positionModule"></detailMap>
+      <detailIntro :priceIntro="mainPart.introductionModule"></detailIntro>
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@ import detailLandlord from "@/views/detail/cpns/detail_04-landlord.vue"
 import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import detailNotice from "@/views/detail/cpns/detail_06-notice.vue"
 import detailMap from "@/views/detail/cpns/detail_07-map.vue"
+import detailIntro from "@/views/detail/cpns/detail_08-intro.vue"
 import {computed} from "vue";``
 
 const route = useRoute()
