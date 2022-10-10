@@ -15,6 +15,7 @@
       <detailInfos :info-data="mainPart.topModule"></detailInfos>
       <detailFacility :facilityData="mainPart.dynamicModule.facilityModule.houseFacility"></detailFacility>
       <detailLandlord :landLord="mainPart.dynamicModule.landlordModule"></detailLandlord>
+      <detailComment :commentData="mainPart.dynamicModule.commentModule"></detailComment>
     </div>
   </div>
 </template>
@@ -28,6 +29,7 @@ import detailSwipe from "@/views/detail/cpns/detail_01-swipe.vue"
 import detailInfos from "@/views/detail/cpns/detail_02-infos.vue"
 import detailFacility from "@/views/detail/cpns/detail_03-facility.vue"
 import detailLandlord from "@/views/detail/cpns/detail_04-landlord.vue"
+import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import {computed} from "vue";
 
 const route = useRoute()
