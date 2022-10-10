@@ -20,6 +20,10 @@
       <detailMap :position="mainPart.dynamicModule.positionModule"></detailMap>
       <detailIntro :priceIntro="mainPart.introductionModule"></detailIntro>
     </div>
+    <div class="footer">
+      <img src="@/assets/img/detail/icon_ensure.png" alt="">
+      <div class="text">弘源旅途, 永无止境!</div>
+    </div>
   </div>
 </template>
 
@@ -36,8 +40,7 @@ import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import detailNotice from "@/views/detail/cpns/detail_06-notice.vue"
 import detailMap from "@/views/detail/cpns/detail_07-map.vue"
 import detailIntro from "@/views/detail/cpns/detail_08-intro.vue"
-import {computed} from "vue";``
-
+import {computed} from "vue";
 const route = useRoute()
 const router = useRouter()
 //获取数据
@@ -52,4 +55,21 @@ const onClickLeft = () => {
 </script>
 
 <style scoped lang="less">
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+
+  img {
+    width: 123px;
+  }
+
+  .text {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #7688a7;
+  }
+}
 </style>
