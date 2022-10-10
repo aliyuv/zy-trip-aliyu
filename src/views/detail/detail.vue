@@ -17,6 +17,7 @@
       <detailLandlord :landLord="mainPart.dynamicModule.landlordModule"></detailLandlord>
       <detailComment :commentData="mainPart.dynamicModule.commentModule"></detailComment>
       <detailNotice :orderRules="mainPart.dynamicModule.rulesModule.orderRules"></detailNotice>
+      <detailMap :position="mainPart.dynamicModule.positionModule"></detailMap>
     </div>
   </div>
 </template>
@@ -32,6 +33,7 @@ import detailFacility from "@/views/detail/cpns/detail_03-facility.vue"
 import detailLandlord from "@/views/detail/cpns/detail_04-landlord.vue"
 import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import detailNotice from "@/views/detail/cpns/detail_06-notice.vue"
+import detailMap from "@/views/detail/cpns/detail_07-map.vue"
 import {computed} from "vue";``
 
 const route = useRoute()
