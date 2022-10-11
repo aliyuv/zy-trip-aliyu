@@ -1,12 +1,12 @@
 <template>
-  <div class="detail">
-    <van-tabs v-model:active="active" scrollspy sticky >
-      <van-tab v-for="index in mainPart?.dynamicModule.moduleSort.length" :title="'选项 ' + index">
-          内容 {{ index }}
-      </van-tab>
-    </van-tabs>
-
+  <div class="detail" ref="detaiRef">
     <!--  导航栏  -->
+    <tabControl
+        :titles="['abc','cvs','csa','asa','sas','saq']"
+        v-if="scrollBool"
+        class="tab-control-fixed"
+        @click="tabClick"
+    />
     <van-nav-bar
         title="谵语旅途"
         left-text="旅途"
@@ -30,7 +30,7 @@
     </div>
     <div class="footer">
       <img src="@/assets/img/detail/icon_ensure.png" alt="">
-      <div class="text">弘源旅途, 永无止境!</div>
+      <div class="text">谵语旅途, 永无止境!</div>
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@
 import useDetailStore from "@/store/modules/detail/detail.js"
 import {storeToRefs} from "pinia"
 import {useRoute, useRouter} from "vue-router";
+import tabControl from "@/components/tab-control/tab-control.vue"
 import detailSwipe from "@/views/detail/cpns/detail_01-swipe.vue"
 import detailInfos from "@/views/detail/cpns/detail_02-infos.vue"
 import detailFacility from "@/views/detail/cpns/detail_03-facility.vue"
@@ -63,19 +64,27 @@ const onClickLeft = () => {
   router.back()
 }
 
-const active = ref(0)
-const {scrollTop} = useScrollTop()
-const scrollTopBool = computed(() => {
+const detaiRef = ref(null)
+const {scrollTop} = useScrollTop(detaiRef)
+const scrollBool = computed(() => {
   console.log(scrollTop.value);
-  return scrollTop.value > 260
+  return scrollTop.value > 296
 })
-const clickTab = () => {
-  console.log(this);
-  console.log(11);
+
+const tabClick = (index) => {
+  detaiRef.value.scrollTo({
+    top: (index + 1) * 200,
+    behavior: "smooth"
+  })
 }
 </script>
 
 <style scoped lang="less">
+.detail {
+  height: 100vh;
+  overflow-y: auto;
+}
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -99,6 +108,15 @@ const clickTab = () => {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 99;
+}
+
+.tab-control-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 99;
 }
 </style>

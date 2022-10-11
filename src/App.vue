@@ -8,7 +8,7 @@ const route = useRoute()
 <template>
   <div class="app">
     <router-view></router-view>
-    <tab-bar v-if="!route.meta.hiddenTab"></tab-bar>
+    <tab-bar v-show="!route.meta.hiddenTab"></tab-bar>
     <loading></loading>
   </div>
 </template>
