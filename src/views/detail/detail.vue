@@ -1,5 +1,11 @@
 <template>
   <div class="detail">
+    <van-tabs v-model:active="active" scrollspy sticky >
+      <van-tab v-for="index in mainPart?.dynamicModule.moduleSort.length" :title="'选项 ' + index">
+          内容 {{ index }}
+      </van-tab>
+    </van-tabs>
+
     <!--  导航栏  -->
     <van-nav-bar
         title="谵语旅途"
@@ -9,6 +15,8 @@
     />
     <!-- 轮播图-->
     <div v-if="mainPart">
+      <!--   滚动导航 -->
+
       <detail-swipe :house-id="route.params.id"
                     :swipe-data="mainPart.topModule.housePicture.housePics"
       ></detail-swipe>
@@ -40,7 +48,9 @@ import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import detailNotice from "@/views/detail/cpns/detail_06-notice.vue"
 import detailMap from "@/views/detail/cpns/detail_07-map.vue"
 import detailIntro from "@/views/detail/cpns/detail_08-intro.vue"
-import {computed} from "vue";
+import {computed, onMounted, ref} from "vue";
+import useScrollTop from "@/hooks/useScroll.js";
+
 const route = useRoute()
 const router = useRouter()
 //获取数据
@@ -51,6 +61,17 @@ const mainPart = computed(() => detailAllData.value.mainPart)
 //返回上一级
 const onClickLeft = () => {
   router.back()
+}
+
+const active = ref(0)
+const {scrollTop} = useScrollTop()
+const scrollTopBool = computed(() => {
+  console.log(scrollTop.value);
+  return scrollTop.value > 260
+})
+const clickTab = () => {
+  console.log(this);
+  console.log(11);
 }
 </script>
 
@@ -71,5 +92,13 @@ const onClickLeft = () => {
     font-size: 12px;
     color: #7688a7;
   }
+}
+
+.tabs {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
 }
 </style>
