@@ -26,6 +26,13 @@ const itemClick = (index) => {
   currentIndex.value = index
   emit('setCurrentIndex', index)
 }
+const setCurrentIndex = (index) => {
+  currentIndex.value = index
+}
+defineExpose({
+  currentIndex,
+  setCurrentIndex
+})
 </script>
 
 <style scoped lang="less">

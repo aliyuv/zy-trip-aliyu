@@ -2,10 +2,11 @@
   <div class="detail" ref="detaiRef">
     <!--  导航栏  -->
     <tabControl
-        :titles="['abc','cvs','csa','asa','sas','saq']"
+        :titles="names"
         v-if="scrollBool"
         class="tab-control-fixed"
-        @click="tabClick"
+        @setCurrentIndex="tabClick"
+        ref="tabControlRef"
     />
     <van-nav-bar
         title="谵语旅途"
@@ -14,19 +15,21 @@
         @click-left="onClickLeft"
     />
     <!-- 轮播图-->
-    <div v-if="mainPart">
+    <div v-if="mainPart" v-memo="[mainPart]">
       <!--   滚动导航 -->
 
       <detail-swipe :house-id="route.params.id"
                     :swipe-data="mainPart.topModule.housePicture.housePics"
       ></detail-swipe>
-      <detailInfos :info-data="mainPart.topModule"></detailInfos>
-      <detailFacility :facilityData="mainPart.dynamicModule.facilityModule.houseFacility"></detailFacility>
-      <detailLandlord :landLord="mainPart.dynamicModule.landlordModule"></detailLandlord>
-      <detailComment :commentData="mainPart.dynamicModule.commentModule"></detailComment>
-      <detailNotice :orderRules="mainPart.dynamicModule.rulesModule.orderRules"></detailNotice>
-      <detailMap :position="mainPart.dynamicModule.positionModule"></detailMap>
-      <detailIntro :priceIntro="mainPart.introductionModule"></detailIntro>
+      <detailInfos name="描述" :info-data="mainPart.topModule" :ref="getSectionRef"/>
+      <detailFacility name="设施"
+                      :facilityData="mainPart.dynamicModule.facilityModule.houseFacility"
+                      :ref="getSectionRef"/>
+      <detailLandlord name="房东" :landLord="mainPart.dynamicModule.landlordModule" :ref="getSectionRef"/>
+      <detailComment name="评论" :commentData="mainPart.dynamicModule.commentModule" :ref="getSectionRef"/>
+      <detailNotice name="须知" :orderRules="mainPart.dynamicModule.rulesModule.orderRules" :ref="getSectionRef"/>
+      <detailMap name="周边" :position="mainPart.dynamicModule.positionModule" :ref="getSectionRef"/>
+      <detailIntro :priceIntro="mainPart.introductionModule"/>
     </div>
     <div class="footer">
       <img src="@/assets/img/detail/icon_ensure.png" alt="">
@@ -49,7 +52,7 @@ import detailComment from "@/views/detail/cpns/detail_05-comment.vue"
 import detailNotice from "@/views/detail/cpns/detail_06-notice.vue"
 import detailMap from "@/views/detail/cpns/detail_07-map.vue"
 import detailIntro from "@/views/detail/cpns/detail_08-intro.vue"
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import useScrollTop from "@/hooks/useScroll.js";
 
 const route = useRoute()
@@ -64,19 +67,74 @@ const onClickLeft = () => {
   router.back()
 }
 
-const detaiRef = ref(null)
+//detail 元素 ref
+const detaiRef = ref()
+//判断滚动到一定距离显示tab control
 const {scrollTop} = useScrollTop(detaiRef)
 const scrollBool = computed(() => {
-  console.log(scrollTop.value);
-  return scrollTop.value > 296
+  return scrollTop.value > 260
 })
 
+//定义个容纳 对应组件根元素的容器
+const sectionEl = ref({})
+
+// 获取组件根元素根容器里面的Key 就是组件上的name 属性
+const names = computed(() => {
+  return Object.keys(sectionEl.value)
+})
+
+//获取每个组件
+const getSectionRef = (value) => {
+  if (!value) return
+  //取出name属性
+  const name = value.$el.getAttribute("name")
+  //name 作为key
+  sectionEl.value[name] = value.$el
+}
+let isClick = false
+let currentDistance = -1
 const tabClick = (index) => {
+
+  // 遍历出 sectionEl对象里面的每一个 key
+  const key = Object.keys(sectionEl.value)[index]
+  //通过key 取到每一个元素
+  const el = sectionEl.value[key]
+  // 定义每一个元素的 距离 顶部 的 top 距离是多少
+  let distance = el.offsetTop
+  //如果 index 不等于 0 就是第一个元素不设置, 其他元素都需要 减去 44 (44代表的就是tab control 的高度)
+  if (index !== 0) {
+    distance = distance - 44
+  } else {
+    distance = distance - 42
+  }
+  isClick = true
+  currentDistance = distance
+  //设置 当前页面的根元素的 scrollTop
   detaiRef.value.scrollTo({
-    top: (index + 1) * 200,
+    top: distance,
     behavior: "smooth"
   })
 }
+
+const tabControlRef = ref()
+
+watch(scrollTop, (newValue) => {
+  if (newValue === currentDistance) {
+    isClick = false
+  }
+
+  if (isClick) return
+  const elements = Object.values(sectionEl.value)
+  const values = elements.map(el => el.offsetTop)
+  let index = values.length - 1
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > newValue + 44) {
+      index = i - 1
+      break
+    }
+  }
+  tabControlRef.value?.setCurrentIndex(index)
+})
 </script>
 
 <style scoped lang="less">
