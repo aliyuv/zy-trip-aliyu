@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div>
     <homeNavtitle></homeNavtitle>
 <!--    <home-serach-box></home-serach-box>-->
   </div>
@@ -12,6 +12,4 @@ import homeNavtitle from "./home-navbar-title.vue"
 </script>
 
 <style lang="less" scoped>
-.home {
-}
 </style>

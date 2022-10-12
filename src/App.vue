@@ -6,15 +6,13 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="app">
     <router-view v-slot="props">
       <keep-alive include="home">
         <component :is="props.Component"></component>
       </keep-alive>
     </router-view>
-    <tab-bar v-show="!route.meta.hiddenTab"></tab-bar>
+    <tab-bar v-show="!route.meta.hiddenTab" class="topcase"></tab-bar>
     <loading></loading>
-  </div>
 </template>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-  <section class="search-box" ref="searchBoxRef">
+  <section class="search-box" ref="searchRef">
     <section class="banner">
       <img src="@/assets/img/home/banner.webp" alt="">
     </section>
@@ -59,7 +59,7 @@
         <h1>热门精选</h1>
       </div>
       <div class="list">
-        <template v-for="(item,index) in houseListData">
+        <template v-for="(item,index) in houseListDatas">
           <house-list-v9 v-if="item.discoveryContentType === 9" :houseListData="item"
                          @click="toDetailClick(item.data)"></house-list-v9>
           <house-list-v3 v-else-if="item.discoveryContentType === 3" :houseListData="item"
@@ -94,19 +94,25 @@ const categoriesStore = useCategories()
 categoriesStore.fetchCategoriesData()
 const {categoriesData} = storeToRefs(categoriesStore)
 
-const houseListStore = useHouseList()
-const {houseListData} = storeToRefs(houseListStore)
-houseListStore.getHouseListData()
+// const houseListStore = useHouseList()
+// const {houseListData} = storeToRefs(houseListStore)
+// houseListStore.getHouseListData()
+// const {isScrollBottoming, scrollTop} = useScrollTop()
+//
+// watch(isScrollBottoming, (newValue) => {
+//   if (newValue) {
+//     houseListStore.getHouseListData().then(() => {
+//       isScrollBottoming.value = false
+//     }).catch(() => {
+//       console.log("没有数据啦~")
+//     })
+//   }
+// })
 
-const searchBoxRef = ref(null)
-const {isScrollBottoming, scrollTop} = useScrollTop(searchBoxRef)
-watch(isScrollBottoming, (newValue) => {
-  if (newValue) {
-    houseListStore.getHouseListData().then(() => {
-      isScrollBottoming.value = false
-    }).catch(() => {
-      console.log("没有数据啦~")
-    })
+defineProps({
+  houseListDatas: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -170,7 +176,6 @@ const toDetailClick = (data) => {
 
 <style lang="less" scoped>
 .search-box {
-  padding-bottom: 60px;
 }
 
 .banner {
