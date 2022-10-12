@@ -30,6 +30,11 @@ const endDateStr = computed(() => formatMonthDay(endDate.value, "MM.DD"))
 </script>
 
 <style lang="less" scoped>
+.home{
+  height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
 .search-bar {
   position: fixed;
   z-index: 9;

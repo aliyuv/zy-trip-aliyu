@@ -1,5 +1,5 @@
 <template>
-  <section class="search-box">
+  <section class="search-box" ref="searchBoxRef">
     <section class="banner">
       <img src="@/assets/img/home/banner.webp" alt="">
     </section>
@@ -98,7 +98,8 @@ const houseListStore = useHouseList()
 const {houseListData} = storeToRefs(houseListStore)
 houseListStore.getHouseListData()
 
-const {isScrollBottoming, scrollTop} = useScrollTop()
+const searchBoxRef = ref(null)
+const {isScrollBottoming, scrollTop} = useScrollTop(searchBoxRef)
 watch(isScrollBottoming, (newValue) => {
   if (newValue) {
     houseListStore.getHouseListData().then(() => {
